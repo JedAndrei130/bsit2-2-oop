@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void main(Striner(System.in);
-        int totalNumber = 0;g[] args) {
-            Scanner input = new Scann
+    public static void main(String[] args) {
+        int totalNumber = 0;
+        Scanner input = new Scanner(System.in);
 
         for (int i = 1; i <= 5; i++) {
             System.out.print("Enter number " + i + ": ");
