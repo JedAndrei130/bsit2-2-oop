@@ -1,0 +1,90 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class LibraryManager {
+    private ArrayList<String> books;
+    private Scanner scanner;
+
+    public LibraryManager() {
+        books = new ArrayList<>();
+        scanner = new Scanner(System.in);
+
+        books.add("Java Programming");
+        books.add("Web Development");
+        books.add("Database Design");
+    }
+
+    public void showBooks() {
+        try {
+            if (books == null) {
+                throw new IllegalStateException("Error: Book list is not initialized!");
+            }
+            System.out.println("\n--- Current Books ---");
+            if (books.isEmpty()) {
+                System.out.println("No books available in the library.");
+            } else {
+                for (int i = 0; i < books.size(); i++) {
+                    System.out.println((i + 1) + ". " + books.get(i));
+                }
+            }
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            System.out.println("Display operation completed.\n");
+        }
+    }
+
+    public void addBook() {
+        try {
+            System.out.print("Enter book title to add: ");
+            String title = scanner.nextLine().trim();
+
+            if (title == null || title.isEmpty()) {
+                throw new IllegalArgumentException("Error: Book title cannot be empty!");
+            }
+            if (title.length() < 3) {
+                throw new IllegalArgumentException("Error: Book title must be at least 3 characters long!");
+            }
+
+            books.add(title);
+            System.out.println("Book '" + title + "' added successfully!");
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            System.out.println("Add book operation completed.\n");
+        }
+    }
+
+    public void removeBook() {
+        try {
+            if (books.isEmpty()) {
+                throw new IllegalStateException("Error: No books available to remove!");
+            }
+
+            System.out.print("Enter book number to remove (1-" + books.size() + "): ");
+            String input = scanner.nextLine();
+
+            int index = Integer.parseInt(input) - 1;
+
+            if (index < 0) {
+                throw new IllegalArgumentException("Error: Negative index is not allowed!");
+            }
+
+            String removedBook = books.remove(index);
+            System.out.println("Book '" + removedBook + "' removed successfully!");
+
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Please enter a valid number!");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Error: Invalid book number! Please enter between 1 and " + books.size() + ".");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            System.out.println("Remove book operation completed.\n");
+        }
+    }
+}
+
